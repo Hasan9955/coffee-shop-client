@@ -8,6 +8,7 @@ const Header = () => {
             <NavLink className="btn link" to='/signIn'>Sign In</NavLink>
             <NavLink className="btn link" to='/signUp'>Sign Up</NavLink>
             <NavLink className="btn link" to='/users'>Users</NavLink>
+            <NavLink className="btn link" to='/users2'>Users 2</NavLink>
         </div>
     );
 };

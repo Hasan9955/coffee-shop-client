@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import axios from "axios";
+
 
 const SignIn = () => {
 
@@ -24,25 +26,50 @@ const {signUser} = useContext(AuthContext)
 
             }
 
-            fetch('https://coffee-store-server-d2wbs3ji3-hasan-bin-alis-projects.vercel.app/users',{
-                method: 'PATCH',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-            .then(res => res.json())
+
+            // patch user by axios
+            axios.patch('https://coffee-store-server-wine-eight.vercel.app/users', user)
             .then(data => {
-                console.log(data)
-                if(data.acknowledged){
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'User sign in successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Cool'
-                      })
-                }
+                console.log(data.data)
+                if(data.data.acknowledged){
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'User sign in successfully',
+                                icon: 'success',
+                                confirmButtonText: 'Cool'
+                              })
+                        }
             })
+            .catch(error => console.error(error))
+
+
+
+            
+
+
+
+
+            // patch user by fetch 
+
+            // fetch('https://coffee-store-server-wine-eight.vercel.app/users',{
+            //     method: 'PATCH',
+            //     headers: {
+            //         'content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(user)
+            // })
+            // .then(res => res.json())
+            // .then(data => {
+            //     console.log(data)
+            //     if(data.acknowledged){
+            //         Swal.fire({
+            //             title: 'Success!',
+            //             text: 'User sign in successfully',
+            //             icon: 'success',
+            //             confirmButtonText: 'Cool'
+            //           })
+            //     }
+            // })
         })
         .catch(error => {
             console.error(error)

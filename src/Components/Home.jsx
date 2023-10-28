@@ -24,7 +24,7 @@ const Home = ({coffee, coffees, setCoffees}) => {
               }).then((result) => {
                 if (result.isConfirmed) {
                   console.log(id)
-                  fetch(`https://coffee-store-server-d2wbs3ji3-hasan-bin-alis-projects.vercel.app/coffee/${_id}`, {
+                  fetch(`https://coffee-store-server-wine-eight.vercel.app/coffee/${_id}`, {
                     method: 'DELETE'
 
                   })

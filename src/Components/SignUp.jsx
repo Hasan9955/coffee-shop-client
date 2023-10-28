@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const SignUp = () => {
 
@@ -22,26 +23,49 @@ const SignUp = () => {
             // trying to create this user in mongo db data base
             const createAt = result.user?.metadata?.creationTime
             const user = {email, password, createAt}
-            fetch('https://coffee-store-server-d2wbs3ji3-hasan-bin-alis-projects.vercel.app/users', {
-                method: "POST",
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
 
-            })
-            .then(res => res.json())
+
+
+            // add user by axios 
+            axios.post('https://coffee-store-server-wine-eight.vercel.app/users', user)
             .then(data => {
-                console.log(data)
-                if (data.acknowledged){
+                console.log(data.data)
+                if (data.data.acknowledged){
                     Swal.fire({
                         title: 'Success!',
                         text: 'User added successfully',
                         icon: 'success',
                         confirmButtonText: 'Cool'
                       })
-                }
+                    }
             })
+            .catch(error => console.error(error))
+
+
+
+
+
+            // add user by fetch
+            // fetch('https://coffee-store-server-wine-eight.vercel.app/users', {
+            //     method: "POST",
+            //     headers: {
+            //         'content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(user)
+
+            // })
+            // .then(res => res.json())
+            // .then(data => {
+            //     console.log(data)
+            //     if (data.acknowledged){
+            //         Swal.fire({
+            //             title: 'Success!',
+            //             text: 'User added successfully',
+            //             icon: 'success',
+            //             confirmButtonText: 'Cool'
+            //           })
+            //     }
+            // })
         })
         .catch(error => console.error(error))
         

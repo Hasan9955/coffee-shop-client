@@ -10,7 +10,7 @@ const Users = () => {
 
 
     const handleDelete = (id) => {
-        fetch(`https://coffee-store-server-d2wbs3ji3-hasan-bin-alis-projects.vercel.app/users/${id}`,{
+        fetch(`https://coffee-store-server-wine-eight.vercel.app/users/${id}`,{
             method: 'DELETE'
         })
         .then(res => res.json())
@@ -24,7 +24,7 @@ const Users = () => {
     }
     return (
         <div>
-            <h2 className="text-4xl">User Length: {users.length}</h2>
+            <h2 className="text-4xl">User Length: {users?.length}</h2>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -40,7 +40,7 @@ const Users = () => {
                     <tbody>
                         {/* row 1 */}
                         {
-                            users.map(user => <tr key={user._id} className="hover">
+                            users?.map(user => <tr key={user._id} className="hover">
                             <th>😎</th>
                             <td>{user.email}</td>
                             <td>{user.createAt}</td>

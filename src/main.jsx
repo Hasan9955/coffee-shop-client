@@ -14,6 +14,11 @@ import SignUp from './Components/SignUp';
 import AuthProvider from './Provider/AuthProvider';
 import Users from './Components/Users';
 import Main from './Components/Main';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import Users2 from './Components/Users2';
 
 
 const router = createBrowserRouter([
@@ -32,11 +37,11 @@ const router = createBrowserRouter([
       {
         path: '/updateCoffee/:id',
         element: <UpdateCoffee></UpdateCoffee>,
-        loader: ({ params }) => fetch(`https://coffee-store-server-d2wbs3ji3-hasan-bin-alis-projects.vercel.app/coffee/${params.id}`)
+        loader: ({ params }) => fetch(`https://coffee-store-server-wine-eight.vercel.app/coffee/${params.id}`)
       },
       {
         path: '/details/:id',
-        loader: ({ params }) => fetch(`https://coffee-store-server-d2wbs3ji3-hasan-bin-alis-projects.vercel.app/coffee/${params.id}`),
+        loader: ({ params }) => fetch(`https://coffee-store-server-wine-eight.vercel.app/coffee/${params.id}`),
         element: <Details></Details>
       },
       {
@@ -50,20 +55,27 @@ const router = createBrowserRouter([
       {
         path: '/users',
         element: <Users></Users>,
-        loader: () => fetch('https://coffee-store-server-d2wbs3ji3-hasan-bin-alis-projects.vercel.app/users')
-    
+        loader: () => fetch('https://coffee-store-server-wine-eight.vercel.app/users')
+
+      },
+      {
+        path: '/users2',
+        element: <Users2></Users2>
       }
     ]
   },
-  
+
 ]);
 
+const queryClient = new QueryClient()
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )
